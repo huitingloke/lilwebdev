@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+}
+
+#main-main-div {
+    height: 100vh;
+    background-image: linear-gradient(to bottom, rgb(250, 172, 169), rgb(221, 214, 243));
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+  }
+  
+  #main-div {
+    margin: 31.5vh;
+    padding: 30px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FFFFFF;
+  }
+  
+  .about-buttons {
+    margin: 10px;
+  }
+  
+  #beth{
+    font-family: 'Quicksand', sans-serif; 
+    font-size: 10vh;
+    display: flex;
+    justify-content: center;
+    color: #530C4C;
+    margin: 5vh;
+  }
+  
+  .about-buttons {
+    font-family: 'Courgette', cursive;
+    font-size: 5vh;
+    background-color: #EDA9A9;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  #contact-button {
+    position: absolute;
+    top: 87vh;
+    left: 4vh;
+    font-family: 'Courgette', cursive;
+    font-size: 5vh;
+    background-color: #948ABE;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 88vh;
+    margin-top: 3vh;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
