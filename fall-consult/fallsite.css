@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+}
+
+#main-landing {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    opacity: 75%;
+    height: 1000px;
+    background-image: url("main-background.png");
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20vh;
+}
+
+#hey-friend {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+}
+
+#hey, #friend {
+    font-size: 13vh;
+    margin: 0;
+    color: white;
+    padding-left: 15px;
+}
+
+#tours-for-you {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-family: 'Inter', sans-serif;
+    font-size: 6vh;
+    margin: 0;
+    color: white;
+    padding-right: 15px;
+}
+
+#main-advert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-evenly;
+}
+
+.group-advert {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    padding-bottom: 8vh;
+}
+
+.desc-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px;
+}
+
+.circle-image {
+    height: 30vh;
+    width: auto;
+}
+
+.circle-title {
+    font-size: 7vh;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+}
+
+.circle-desc {
+    font-size: 2vh;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+#main-testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(#FFFFFF, #E4A987);
+}
+
+#testimonial-title {
+    font-size: 8vh;
+    border-style: solid;
+    padding: 0px 30px;
+    border-width: 0px 3px;
+    border-color: #381111;
+    font-style: italic;
+    margin: 10vh;
+    color: #381111;
+    font-family: 'Inter', sans-serif;
+}
+
+#testimonial-row {
+    display: flex;
+    margin-bottom: 10vh;
+}
+
+.testimonial-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 40px;
+    box-shadow: 1px 1px 3px #381111;
+}
+
+.testimonial-name {
+    font-style: italic;
+    font-size: 3vh;
+    margin-bottom: 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+.testimonial-desc {
+    font-size: 2vh;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+}
+
+footer {
+    margin: 10px;
+    text-align: center;
+    font-size: 1vh;
+    font-family: 'Raleway', sans-serif;
+}
