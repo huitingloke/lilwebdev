@@ -1,0 +1,85 @@
+body {
+    background-image: linear-gradient(to bottom right, #F8CDDA, #1D2B64);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sun-icon {
+    position: absolute;
+    top: 4%;
+    right: 3%;
+    height: 5vh;
+}
+
+#sun-icon:hover {
+    cursor: pointer;
+}
+
+#collection-div {
+    height: auto;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: white;
+    border-radius: 50px;
+}
+
+#smaller-collection-div {
+    padding: 50px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-dividers {
+    text-align: left;
+}
+
+#logo-icon {
+    height: 50%;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.descriptors {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: #0D1453;
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: 700;
+}
+
+.input-div {
+    width: 100%;
+}
+
+.input-boxes {
+    border-radius: 15px;
+    border: 0;
+    background-color: rgb(221, 221, 221);
+    height: 30px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#login-button {
+    margin-top: 40px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 0;
+    background-color: #D7D1E9;
+    color: #0D1453;
+    cursor: pointer;
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}

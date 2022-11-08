@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body id="body">
+
+    <a id="sun-icon-button" href="login2.html"><img id="sun-icon" src="sunicon.png" alt=""></a>
+    <div id="collection-div">
+        <div id="smaller-collection-div">
+            <img src="logolightmode.png" alt="" id="logo-icon">
+            <div class="box-dividers">
+                <p class="descriptors">username</p>
+                <div class="input-div">
+                    <input class="input-boxes" id="username-box">
+                </div>
+            </div>
+            <div class="box-dividers">
+                <p class="descriptors">password</p>
+                <div class="input-div">
+                    <input class="input-boxes" id="password-box">
+                </div>
+            </div>
+            <button id="login-button">next</button>
+        </div>
+    </div>
+
+    <script>
+        //setting up for light mode variable
+        var checker = 0;
+
+        //changing from light to dark mode
+        function changeMode() {
+
+            //changing the checker to reflect the mode
+            if (checker == 0) {
+                checker = 1;
+            } else {
+                checker = 0;
+            }
+            console.log(checker);
+        }
+
+
+
+    </script>
+</body>
+</html>
