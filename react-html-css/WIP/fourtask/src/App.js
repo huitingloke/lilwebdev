@@ -1,3 +1,10 @@
+/**
+ * Things to do:
+ * * Change the data types to objects and implement those
+ * * Render the data types into words again under the component (maybe a loop?)
+ * * Ask Justin how to make the thing completed (ok asking now see what he says bah)
+ */
+
 import './App.css';
 import { useRef, useState } from "react";
 
@@ -8,31 +15,8 @@ const LEVEL = {
   4: "Unurgent, Unimportant"
 }
 
-/*let Storage = {
-  1: [
-    ["whee", "sdfkjhaskdjfkajsdfkasdfjasldflasdjflkasdjflk", 1, false],
-    ["hi", "description", 1, false],
-    ["nerd", "description", 1, false]
-  ],
-  2: [
-    ["dfs", "description", 2, false],
-    ["sfasd", "description", 2, false],
-    ["sadf", "description", 2, false]
-  ],
-  3: [
-    ["sadffasd", "description", 3, false],
-    ["sdf", "description", 3, false],
-    ["asdfsd", "description", 3, false]
-  ],
-  4: [
-    ["whee", "description", 4, false],
-    ["hi", "description", 4, false],
-  ]
-}*/
-
 let CompletedTasks = [
-  ["dfs", "description", 1, false],
-  ["sfasd", "description", 2, false]
+  ,
 ]
 
 /**
@@ -60,14 +44,16 @@ function Completed(props) {
           <th>Priority</th>
           <th>Undo?</th>
         </tr>
-        {CompletedTasks.map((item) => (
-          <tr>
-            <td>{item[0]}</td>
-            <td>{item[1]}</td>
-            <td>{item[2]}</td>
-            <td><input type="checkbox" /></td>
-          </tr>
-        ))}
+        {props.CompletedTasks.map((item) => (
+            <tr>
+              <td>{item.NAME}</td>
+              <td>{item.DESCRIPTION}</td>
+              <td>{item.LEVEL}</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+          ))
+        }
+        
       </table>
     </div>
   );
@@ -84,14 +70,16 @@ function Container(props) {
           <th>Priority</th>
           <th>Done?</th>
         </tr>
-        {props.Storage.map((item) => (
-          <tr>
-            <td>{item[NAME]}</td>
-            <td>{item[DESCRIPTION]}</td>
-            <td>{item[LEVEL]}</td>
-            <td><input type="chec kbox" /></td>
-          </tr>
-        ))}
+          {props.Storage.map((item) => (
+            <tr>
+              <td>{item.NAME}</td>
+              <td>{item.DESCRIPTION}</td>
+              <td>{item.LEVEL}</td>
+              <td><input type="chec kbox" /></td>
+            </tr>
+          ))}
+        
+        
       </table>
     </div>
   );
@@ -119,9 +107,26 @@ function Footer() {
   );
 }
 
+/**
+ * 
+ *  {
+    NAME: "hehehe",
+    DESCRIPTION: "saldkjflaskdf",
+    LEVEL: 4,
+    DONE: true
+  },
+  {
+    NAME: "asdfaweg",
+    DESCRIPTION: "dfg",
+    LEVEL: 3,
+    DONE: true
+  }
+ */
+
 function App() {
 
   const [Storage, updateStorage] = useState([]);
+  const [CompletedTasks, updateCompletedTasks] = useState([]);
 
   const name = useRef();
   const description = useRef();
@@ -169,7 +174,7 @@ function App() {
         <button>Submit</button>
       </form>
       <ShowTask storage={Storage} />
-      <Completed />
+      <Completed CompletedTasks={CompletedTasks} />
       <Footer />
     </div>
   );
