@@ -1,22 +1,11 @@
 import './App.css';
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const LEVEL = {
   1: "Urgent, Important",
   2: "Urgent, Unimportant",
   3: "Unurgent, Important",
   4: "Unurgent, Unimportant"
-}
-
-let Storage = {
-  1: [
-  ],
-  2: [
-  ],
-  3: [
-  ],
-  4: [
-  ]
 }
 
 /*let Storage = {
@@ -87,7 +76,7 @@ function Completed(props) {
 function Container(props) {
   return (
     <div className='Containers'>
-      <h1>{LEVEL[props.level]}</h1>
+      <h1>LEVEL</h1>
       <table className="tableManagement">
         <tr>
           <th>Name</th>
@@ -95,12 +84,12 @@ function Container(props) {
           <th>Priority</th>
           <th>Done?</th>
         </tr>
-        {Storage[props.level].map((item) => (
+        {props.Storage.map((item) => (
           <tr>
-            <td>{item[0]}</td>
-            <td>{item[1]}</td>
-            <td>{item[2]}</td>
-            <td><input type="checkbox" /></td>
+            <td>{item[NAME]}</td>
+            <td>{item[DESCRIPTION]}</td>
+            <td>{item[LEVEL]}</td>
+            <td><input type="chec kbox" /></td>
           </tr>
         ))}
       </table>
@@ -112,12 +101,12 @@ function ShowTask(props) {
   return (
     <div>
       <div className="divSeparators">
-        <Container level="1" />
-        <Container level="2" />
+        <Container level="1" storage={props.storage} />
+        <Container level="2" storage={props.storage} />
       </div>
       <div className="divSeparators">
-        <Container level="3" />
-        <Container level="4" />
+        <Container level="3" storage={props.storage} />
+        <Container level="4" storage={props.storage} />
       </div>
     </div>
 
@@ -126,31 +115,31 @@ function ShowTask(props) {
 
 function Footer() {
   return (
-    <footer>Beth's third React App! Welcome to this organized task tracker and enjoy your stay!</footer>
+    <footer>Beth's third React App! Welcome to this organized task tracker and enjoy your stay! Special thanks to Justin for hard carrying this project too.</footer>
   );
 }
 
-function App() { //do form logic inside here hehe
+function App() {
+
+  const [Storage, updateStorage] = useState([]);
 
   const name = useRef();
   const description = useRef();
   const level = useRef();
-
-  function refresh() {
-    return(ShowTask());
-  }
 
   const submit = (e) => {
     e.preventDefault();
     let theName = name.current.value;
     let theDescription = description.current.value;
     let theLevel = level.current.value;
-    Storage[theLevel].push([theName, theDescription, theLevel]);
-    console.log(Storage[theLevel]);
+    updateStorage(Storage.push({
+      NAME: theName, 
+      DESCRIPTION: theDescription, 
+      LEVEL: theLevel
+    }));
+    console.log(Storage);
     name.current.value = "";
     description.current.value = "";
-    level.current.value = "";
-    refresh();
   }
 
   return (
@@ -179,7 +168,7 @@ function App() { //do form logic inside here hehe
         <br />
         <button>Submit</button>
       </form>
-      <ShowTask />
+      <ShowTask storage={Storage} />
       <Completed />
       <Footer />
     </div>
