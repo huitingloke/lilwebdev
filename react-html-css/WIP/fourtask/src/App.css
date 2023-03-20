@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+h1 {
+  text-align: center;
+}
+
 body {
   background-color: #151524;
   color: white;
@@ -20,16 +24,21 @@ body {
   box-shadow: 5px 5px 20px -10px black;
   margin: 15px;
   background-color: #292640;
+  width: 50%;
 }
 
-
+#completedContainer {
+  width: auto;
+}
 
 table{
-  width: 200px;
+  width: 100%;
 }
 
 td{
   word-break: break-all;
+  width: 25%;
+  text-align: center;
 }
 
 #theForm {
@@ -45,6 +54,11 @@ label {
 
 input {
   padding: 5px;
+  font-family: 'Sono', sans-serif;
+}
+
+#theTitle {
+  text-align: center;
 }
 
 @media only screen and (max-width: 768px) {
@@ -53,5 +67,14 @@ input {
     display: flex;
     flex-direction: column;
   }
+  
+  .Containers {
+    margin: 5%;
+    width: auto;
+  }
 
+}
+
+footer {
+  text-align: center;
 }

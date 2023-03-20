@@ -2,10 +2,10 @@ import './App.css';
 import { useRef } from "react";
 
 const LEVEL = {
-  1: "Urgent, Important",
-  2: "Urgent, Unimportant",
-  3: "Unurgent, Important",
-  4: "Unurgent, Unimportant"
+  1: "Urgent, Important (1)",
+  2: "Urgent, Unimportant (2)",
+  3: "Unurgent, Important (3)",
+  4: "Unurgent, Unimportant (4)"
 }
 
 let Storage = {
@@ -30,6 +30,11 @@ let Storage = {
   ]
 }
 
+let CompletedTasks = [
+  ["dfs", "description", 2, false],
+  ["sfasd", "description", 2, false]
+]
+
 /**
  * var Task = {
  *  ID: 0,
@@ -44,18 +49,25 @@ let Storage = {
  * var Task = [0, "task", "description", 1-4, false]
  */
 
-function Task(props) {
-  return (
-    <h1>somebody is having a mental breakdown and it is me</h1>
-  );
-}
-
 function Completed(props) {
   return (
-    <div>
+    <div className='Containers' id="completedContainer">
       <h1>Completed</h1>
       <table>
-
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Priority</th>
+          <th>Undo?</th>
+        </tr>
+        {CompletedTasks.map((item) => (
+          <tr>
+            <td>{item[0]}</td>
+            <td>{item[1]}</td>
+            <td>{item[2]}</td>
+            <td><input type="checkbox" /></td>
+          </tr>
+        ))}
       </table>
     </div>
   );
@@ -101,6 +113,12 @@ function ShowTask(props) {
   );
 }
 
+function Footer() {
+  return (
+    <footer>Beth's third React App! Welcome to this organized task tracker and enjoy your stay!</footer>
+  );
+}
+
 function App() { //do form logic inside here hehe
 
   let name = useRef();
@@ -111,22 +129,24 @@ function App() { //do form logic inside here hehe
     e.preventDefault();
     level = level.toNumber();
     Storage[level].push([name, description, level, false]);
-    level = "1";
+    name = "";
+    description = "";
+    level = "";
   }
 
   return (
     <div>
-      <h1 id="title">The Essential Task Tracker</h1>
+      <h1 id="theTitle">The Essential Task Tracker</h1>
       <form id="theForm">
         <label>Name</label>
         <input
           type="text"
-          value={name}
+          /*value={name}*/
         />
         <label>Description</label>
         <input
-          type="text"
-          value={description}
+          type="textarea"
+          /*value={description}*/
         />
         <label>Level</label>
         <input
@@ -134,10 +154,12 @@ function App() { //do form logic inside here hehe
           max="4"
           min="1"
         />
+        <br />
         <input type="submit" />
       </form>
       <ShowTask />
       <Completed />
+      <Footer />
     </div>
   );
 }
