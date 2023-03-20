@@ -2,13 +2,24 @@ import './App.css';
 import { useRef } from "react";
 
 const LEVEL = {
-  1: "Urgent, Important (1)",
-  2: "Urgent, Unimportant (2)",
-  3: "Unurgent, Important (3)",
-  4: "Unurgent, Unimportant (4)"
+  1: "Urgent, Important",
+  2: "Urgent, Unimportant",
+  3: "Unurgent, Important",
+  4: "Unurgent, Unimportant"
 }
 
 let Storage = {
+  1: [
+  ],
+  2: [
+  ],
+  3: [
+  ],
+  4: [
+  ]
+}
+
+/*let Storage = {
   1: [
     ["whee", "sdfkjhaskdjfkajsdfkasdfjasldflasdjflkasdjflk", 1, false],
     ["hi", "description", 1, false],
@@ -28,10 +39,10 @@ let Storage = {
     ["whee", "description", 4, false],
     ["hi", "description", 4, false],
   ]
-}
+}*/
 
 let CompletedTasks = [
-  ["dfs", "description", 2, false],
+  ["dfs", "description", 1, false],
   ["sfasd", "description", 2, false]
 ]
 
@@ -121,41 +132,52 @@ function Footer() {
 
 function App() { //do form logic inside here hehe
 
-  let name = useRef();
-  let description = useRef();
-  let level = useRef();
+  const name = useRef();
+  const description = useRef();
+  const level = useRef();
+
+  function refresh() {
+    return(ShowTask());
+  }
 
   const submit = (e) => {
     e.preventDefault();
-    level = level.toNumber();
-    Storage[level].push([name, description, level, false]);
-    name = "";
-    description = "";
-    level = "";
+    let theName = name.current.value;
+    let theDescription = description.current.value;
+    let theLevel = level.current.value;
+    Storage[theLevel].push([theName, theDescription, theLevel]);
+    console.log(Storage[theLevel]);
+    name.current.value = "";
+    description.current.value = "";
+    level.current.value = "";
+    refresh();
   }
 
   return (
     <div>
       <h1 id="theTitle">The Essential Task Tracker</h1>
-      <form id="theForm">
+      <form id="theForm" onSubmit={submit}>
         <label>Name</label>
         <input
           type="text"
-          /*value={name}*/
+          ref={name}
+          placeholder="Enter your task"
         />
         <label>Description</label>
         <input
           type="textarea"
-          /*value={description}*/
+          ref={description}
+          placeholder="Enter your task's description"
         />
         <label>Level</label>
-        <input
-          type="number"
-          max="4"
-          min="1"
-        />
+        <select ref={level}>
+          <option value="1" selected>Urgent, Important</option>
+          <option value="2">Urgent, Unimportant</option>
+          <option value="3">Not Urgent, Important</option>
+          <option value="4">Not Urgent, Unimportant</option>
+        </select>
         <br />
-        <input type="submit" />
+        <button>Submit</button>
       </form>
       <ShowTask />
       <Completed />

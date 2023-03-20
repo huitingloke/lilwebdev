@@ -52,7 +52,7 @@ label {
   font-size: 20px;
 }
 
-input {
+input, select, button {
   padding: 5px;
   font-family: 'Sono', sans-serif;
 }
@@ -69,12 +69,14 @@ input {
   }
   
   .Containers {
-    margin: 5%;
+    margin: 15px;
     width: auto;
+
   }
 
 }
 
 footer {
   text-align: center;
+  margin-bottom: 15px;
 }
