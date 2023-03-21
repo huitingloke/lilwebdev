@@ -3,6 +3,7 @@
  * * Change the data types to objects and implement those
  * * Render the data types into words again under the component (maybe a loop?)
  * * Ask Justin how to make the thing completed (ok asking now see what he says bah)
+ * * Justin said give the checkboxes their own useState, I really don't have the patience for this anymore I want to cry
  */
 
 import './App.css';
@@ -14,10 +15,6 @@ const LEVEL = {
   3: "Unurgent, Important",
   4: "Unurgent, Unimportant"
 }
-
-let CompletedTasks = [
-  ,
-]
 
 /**
  * var Task = {
@@ -32,6 +29,15 @@ let CompletedTasks = [
  * 
  * var Task = [0, "task", "description", 1-4, false]
  */
+
+function checkedOff() {
+  
+  let [isChecked, isCheckedUpdateTo] = useState(false);
+  
+  return (
+      <input type="checkbox" checked={isChecked} onClick={isCheckedUpdateTo(!isChecked)} />
+  );
+}
 
 function Completed(props) {
   return (
@@ -75,11 +81,11 @@ function Container(props) {
               <td>{item.NAME}</td>
               <td>{item.DESCRIPTION}</td>
               <td>{item.LEVEL}</td>
-              <td><input type="chec kbox" /></td>
+              <td>
+                <checkedOff />
+              </td>
             </tr>
           ))}
-        
-        
       </table>
     </div>
   );
