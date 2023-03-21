@@ -1,12 +1,48 @@
 * {
   font-family: 'PT Mono', monospace;
+  text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button {
+  border-radius: 5px;
+  border: 0;
+  margin-left: 5px;
+  margin-top: 5px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+  padding: 5px;
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 0;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 10px;
+
 }
 
 .mainApp {
-  color: white;
-  background-color: black;
+  color: brown;
+  background: linear-gradient(#F55C7A, #F6BC66);
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 15px 15px;
+}
+
+.widget {
+  background-color: white;
+  border-radius: 15px;
+  padding: 15px;
+  width: 90%;
+  max-width: 600px;
 }
 
 h1 {
@@ -14,5 +50,10 @@ h1 {
 }
 
 #errorNoUser {
-  color: pink;
+  color: rgb(194, 93, 110);
+}
+
+footer {
+  font-size: 10px;
+  font-style: italic;
 }

@@ -18,18 +18,25 @@ function Results(props) {
   function GithubUser({ name, location, hireable, bio }) {
     if (name == null && location == null) {
       return (
-        <h1 id="errorNoUser">The user you have searched for is unavailable!</h1>
+        <>
+          <br />
+          <h1 id="errorNoUser">The user you have searched for is unavailable!</h1>
+        </>
       );
     }
     else if (hireable == null && name != null) {
-      hireable = "Not looking for work";
+      hireable = "Not right now...";
+    }
+    else {
+      hireable = "Yes I am!"
     }
     return (
       <div>
+        <br />
         <h1>{name}</h1>
-        <h2>{location}</h2>
-        <h2><i>{hireable}</i></h2>
-        <p>{bio}</p>
+        <p><i>{bio}</i></p>
+        <h3>Location: {location}</h3>
+        <h3>Looking for work? <i>{hireable}</i></h3>
       </div>
     );
   }
@@ -64,20 +71,22 @@ export function App() {
 
   return (
     <div className="mainApp">
-      <Header />
-      <form onSubmit={submit}>
-        <input 
-          type="text"
-          onChange={(event) => {
-            setUsername(event.target.value);
-          } }
-          placeholder="Github username"
-          value={username}
-        />
-        <button>Check 'em out</button>
-      </form>
-      <Results data={data} />
-      <Footer />
+      <div className="widget" >
+        <Header />
+        <form onSubmit={submit}>
+          <input 
+            type="text"
+            onChange={(event) => {
+              setUsername(event.target.value);
+            } }
+            placeholder="Github username"
+            value={username}
+          />
+          <button>Check 'em out</button>
+        </form>
+        <Results data={data} className="resultsClass" />
+        <Footer />
+      </div>
     </div>
   );
 }
