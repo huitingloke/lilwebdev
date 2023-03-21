@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import "./App.css";
 
 function Header() {
@@ -13,16 +13,7 @@ function Footer() {
   );
 }
 
-function Results() {
-  return (
-    <h1>lskdjfljksdf</h1>
-  );
-}
-
-export function App() {
-
-  let [username, setUsername] = useState("");
-  let [data, setData] = useState(null);
+function Results(props) {
 
   function GithubUser({ name, location, hireable, bio }) {
     if (name == null && location == null) {
@@ -42,20 +33,33 @@ export function App() {
       </div>
     );
   }
+
+  return (
+    <GithubUser 
+    name={props.data.name} 
+    location={props.data.location} 
+    hireable={props.data.hireable} 
+    bio={props.data.bio}
+  />
+  );
+
+}
+
+export function App() {
+
+  let [username, setUsername] = useState("");
+  let [data, setData] = useState("");
   
   const submit = (e) => {
+    e.preventDefault();
     fetch(
       `https://api.github.com/users/${username}`
     ).then((response) => response.json()
     ).then(setData);
-    if (data) return (
-      <GithubUser 
-        name={data.name} 
-        location={data.location} 
-        hireable={data.hireable} 
-        bio={data.bio}
-      />
-    )
+    if (data) {
+      setData(data);
+    }
+    setUsername("");
   }
 
   return (
@@ -67,12 +71,12 @@ export function App() {
           onChange={(event) => {
             setUsername(event.target.value);
           } }
-          placeholder="Enter a name!"
+          placeholder="Github username"
           value={username}
         />
         <button>Check 'em out</button>
       </form>
-      <Results />
+      <Results data={data} />
       <Footer />
     </div>
   );
