@@ -9,11 +9,26 @@ img {
   border-radius: 50%;
 }
 
+.rotate {
+  width: auto;
+  animation: rotation 10s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(359deg);
+  }
+}
+
 .mainApp {
   background: linear-gradient(#ffdde1, #ee9ca7);
   height: 100vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
@@ -28,4 +43,12 @@ h1 {
 
 button {
   margin: 10px;
+  padding: 10px;
+  border-radius: 25px;
+  border: 0;
+}
+
+button:hover {
+  cursor: pointer;
+  color: blue;
 }

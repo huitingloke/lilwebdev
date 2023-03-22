@@ -1,9 +1,10 @@
 import './App.css';
 import { useState } from "react";
+import watermelon from "./Watermelon_Fox.png";
 
 function Timer(props) {
   return (
-    <h1>ehe!! ur time lefttt!!1 {props.time}</h1>
+    <h1>ehe!! ur time lefttt!!1 {(props.time / 60000).toFixed(2)}</h1>
   );
 }
 
@@ -20,26 +21,25 @@ function App() {
 
   return (
     <div className="mainApp">
-      <img src="https://www.kindpng.com/picc/m/236-2362818_anime-sempai-animegirl-heart-kawaii-cute-anime-girl.png" alt="cutiepie" />
-      <div>
-        <h1>pomodOWO appwicashun uwu</h1>
-        <p>henlo!!1 omo do u wanna study? uWU!!!</p>
-        <div id="buttonGroup">
-          <button onClick={
-            () => {
-              
-            }
-          }>start!! study!!</button>
-          <button>pauss!!1</button>
-          <button onClick={
-            () => {
-              setTimer(pomoTime);
-            }
-          }>restawt!!!</button>
-        </div>
-        <Footer />
+      <img src={watermelon} alt="cutiepie" className="rotate" />
+      <h1>pomodOWO appwicashun uwu</h1>
+      <p>henlo!!1 omo do u wanna study? uWU!!!</p>
+      <div id="buttonGroup">
+        <button onClick={
+          () => {
+            
+          }
+        }>start!! study!!</button>
+        <button>pauss!!1</button>
+        <button onClick={
+          () => {
+            setTimer(pomoTime);
+            console.log(timer);
+          }
+        }>restawt!!!</button>
       </div>
-      <Timer time="placeholder" />
+      <Footer />
+      <Timer time={timer} />
     </div>
   );
 }
