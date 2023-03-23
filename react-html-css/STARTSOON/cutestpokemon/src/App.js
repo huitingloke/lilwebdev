@@ -45,6 +45,7 @@ function Results(props) {
       return hash.slice(hash.length-2, hash.length-1);
     }
 
+
     return (
       <div>
         <br />
@@ -63,7 +64,7 @@ function Results(props) {
       <h1>choose a pokemon (please)</h1>
     );
   }
-
+  props.setBackground(COLORS[data.types[0].type.name]);
   return (
     <Pokemon 
       name={data.name}
@@ -78,7 +79,7 @@ function Results(props) {
 function App() {
 
   let [pokemon, setPokemon] = useState("");
-  let [background, setBackground] = useState("FFFFFF");
+  let [background, setBackground] = useState("ABCD44");
   let [data, setData] = useState();
 
   const submit = (e) => {
@@ -90,12 +91,13 @@ function App() {
     if (data) {
       setData(data);
     }
+    
     setPokemon("");
   }
 
   return (
-    <div className="App" style={{backgroundColor: {background}}}>
-      <form onSubmit={submit}>
+    <div className="App" style={{backgroundColor: `#${background}`}}>
+      <form onSubmit={submit} >
         <h1>cute pokemon</h1>
         <input 
           type="text"
@@ -107,7 +109,11 @@ function App() {
         />
         <button>check!</button>
       </form>
-      <Results data={data} />
+      <Results 
+        data={data} 
+        setBackground={setBackground} 
+        background={background}
+      />
     </div>
   );
 }
