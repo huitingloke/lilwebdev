@@ -51,9 +51,9 @@ function Results(props) {
         <br />
         <h1>{name}</h1>
         <img src={image} height="150px" width="auto" alt="Pokemon" />
-        <h2>{height}ft, {weight} pounds</h2>
+        <h2>{height / 10}m, {weight / 10}kg</h2>
         <h2>main type: {type}</h2>
-        <h1>overall cuteness: {generateCuteness(name)}/10</h1>
+        <h1 style={{ color: "brown" }}>overall cuteness: {generateCuteness(name)}/10</h1>
       </div>
     );
   }
@@ -79,41 +79,46 @@ function Results(props) {
 function App() {
 
   let [pokemon, setPokemon] = useState("");
-  let [background, setBackground] = useState("ABCD44");
+  let [background, setBackground] = useState("ffccdd");
   let [data, setData] = useState();
 
   const submit = (e) => {
     e.preventDefault();
-    fetch(
-      `https://pokeapi.co/api/v2/pokemon/${pokemon}`
-    ).then((response) => response.json()
-    ).then(setData);
-    if (data) {
-      setData(data);
+    if (pokemon.trim() != "") {
+      pokemon = pokemon.trim();
+      fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemon}`
+      ).then((response) => response.json()
+      ).then(setData);
+      if (data) {
+        setData(data);
+      }
     }
-    
     setPokemon("");
   }
 
   return (
     <div className="App" style={{backgroundColor: `#${background}`}}>
-      <form onSubmit={submit} >
-        <h1>cute pokemon</h1>
-        <input 
-          type="text"
-          placeholder="choose a pokemon"
-          value={pokemon}
-          onChange={(event) =>
-            setPokemon(event.target.value)
-          }
+      <div className="interalMargin">
+        <form onSubmit={submit} >
+          <h1 id="theTitle">cute pokemon owo</h1>
+          <br />
+          <input 
+            type="text"
+            placeholder="choose a pokemon"
+            value={pokemon}
+            onChange={(event) =>
+              setPokemon(event.target.value)
+            }
+          />
+          <button>check!</button>
+        </form>
+        <Results 
+          data={data} 
+          setBackground={setBackground} 
+          background={background}
         />
-        <button>check!</button>
-      </form>
-      <Results 
-        data={data} 
-        setBackground={setBackground} 
-        background={background}
-      />
+      </div>
     </div>
   );
 }

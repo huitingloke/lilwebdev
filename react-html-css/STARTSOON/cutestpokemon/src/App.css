@@ -1,5 +1,41 @@
 * {
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    margin: 0;
-    text-align: center;
-  }
+  font-family: 'Patrick Hand', cursive;
+  margin: 0;
+  text-align: center;
+}
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  padding: 5px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: 0;
+  background-color: aliceblue;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: 0;
+  margin-left: 5px;
+  margin-top: 5px;
+  font-size: 1.2em;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: maroon;
+  color: white;
+}
+
+#theTitle {
+  font-family: 'Delicious Handrawn', cursive;
+  font-size: 3em;
+}
