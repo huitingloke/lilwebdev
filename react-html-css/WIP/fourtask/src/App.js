@@ -30,7 +30,7 @@ const LEVEL = {
  * var Task = [0, "task", "description", 1-4, false]
  */
 
-function checkedOff() {
+function CheckBox() {
   
   let [isChecked, isCheckedUpdateTo] = useState(false);
   
@@ -129,6 +129,12 @@ function Footer() {
   }
  */
 
+function Header() {
+  return (
+    <h1 id="theTitle">The Essential Task Tracker</h1>
+  );
+}
+
 function App() {
 
   const [Storage, updateStorage] = useState([]);
@@ -155,7 +161,7 @@ function App() {
 
   return (
     <div>
-      <h1 id="theTitle">The Essential Task Tracker</h1>
+      
       <form id="theForm" onSubmit={submit}>
         <label>Name</label>
         <input
