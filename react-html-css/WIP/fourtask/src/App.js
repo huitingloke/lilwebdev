@@ -1,11 +1,3 @@
-/**
- * Things to do:
- * * Change the data types to objects and implement those
- * * Render the data types into words again under the component (maybe a loop?)
- * * Ask Justin how to make the thing completed (ok asking now see what he says bah)
- * * Justin said give the checkboxes their own useState, I really don't have the patience for this anymore I want to cry
- */
-
 import './App.css';
 import { useRef, useState } from "react";
 
@@ -16,26 +8,9 @@ const LEVEL = {
   4: "Unurgent, Unimportant"
 }
 
-/**
- * var Task = {
- *  ID: 0,
- *  Name: "task",
- *  Description: "put description here"
- *  Level: 1-4,
- *  Done: false
- * }
- * 
- * alternatively
- * 
- * var Task = [0, "task", "description", 1-4, false]
- */
-
-function checkedOff() {
-  
-  let [isChecked, isCheckedUpdateTo] = useState(false);
-  
+function CheckedOff(props) {
   return (
-      <input type="checkbox" checked={isChecked} onClick={isCheckedUpdateTo(!isChecked)} />
+      <input type="checkbox" checked={false} onClick={() => props.handleClick()} />
   );
 }
 
@@ -44,48 +19,60 @@ function Completed(props) {
     <div className='Containers' id="completedContainer">
       <h1>Completed</h1>
       <table>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Priority</th>
-          <th>Undo?</th>
-        </tr>
-        {props.CompletedTasks.map((item) => (
-            <tr>
-              <td>{item.NAME}</td>
-              <td>{item.DESCRIPTION}</td>
-              <td>{item.LEVEL}</td>
-              <td><input type="checkbox" /></td>
-            </tr>
-          ))
-        }
-        
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.CompletedTasks.map((item) => (
+              <tr>
+                <td>{item.NAME}</td>
+                <td>{item.DESCRIPTION}</td>
+                <td>{item.LEVEL}</td>
+              </tr>
+            ))
+          }
+        </tbody>
       </table>
     </div>
   );
 }
 
 function Container(props) {
+
+  //takes index, generates a new function that only runs with index...? saves index? idk anymore bro
+  //hyper specific instance of set complete
+  const generateHandler = (index) => () => props.setComplete(index);
+
   return (
     <div className='Containers'>
-      <h1>LEVEL</h1>
+      <h1>{LEVEL[props.level]}</h1>
       <table className="tableManagement">
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Priority</th>
-          <th>Done?</th>
-        </tr>
-          {props.Storage.map((item) => (
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Done?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.storage.map((item) => (
             <tr>
               <td>{item.NAME}</td>
               <td>{item.DESCRIPTION}</td>
               <td>{item.LEVEL}</td>
               <td>
-                <checkedOff />
+                <CheckedOff 
+                  handleClick={generateHandler(item.INDEX)} //put handler to not require passing down index as well
+                />
               </td>
             </tr>
           ))}
+        </tbody>
       </table>
     </div>
   );
@@ -95,12 +82,12 @@ function ShowTask(props) {
   return (
     <div>
       <div className="divSeparators">
-        <Container level="1" storage={props.storage} />
-        <Container level="2" storage={props.storage} />
+        <Container setComplete={props.setComplete} level="1" storage={props.storage.filter(e => e.LEVEL === 1)} />
+        <Container setComplete={props.setComplete} level="2" storage={props.storage.filter(e => e.LEVEL === 2)} />
       </div>
       <div className="divSeparators">
-        <Container level="3" storage={props.storage} />
-        <Container level="4" storage={props.storage} />
+        <Container setComplete={props.setComplete} level="3" storage={props.storage.filter(e => e.LEVEL === 3)} />
+        <Container setComplete={props.setComplete} level="4" storage={props.storage.filter(e => e.LEVEL === 4)} />
       </div>
     </div>
 
@@ -113,42 +100,30 @@ function Footer() {
   );
 }
 
-/**
- * 
- *  {
-    NAME: "hehehe",
-    DESCRIPTION: "saldkjflaskdf",
-    LEVEL: 4,
-    DONE: true
-  },
-  {
-    NAME: "asdfaweg",
-    DESCRIPTION: "dfg",
-    LEVEL: 3,
-    DONE: true
-  }
- */
-
 function App() {
 
-  const [Storage, updateStorage] = useState([]);
-  const [CompletedTasks, updateCompletedTasks] = useState([]);
+  const [storage, setStorage] = useState([]); //second function overwrites, not adds :P
 
   const name = useRef();
   const description = useRef();
   const level = useRef();
 
+  function setComplete(index) {
+    setStorage(storage.map((e, i) => i === index ? {...e, DONE: true} : e)); 
+    //... desctructured e and ignored everything else except for DONE
+  }
+
   const submit = (e) => {
     e.preventDefault();
-    let theName = name.current.value;
-    let theDescription = description.current.value;
-    let theLevel = level.current.value;
-    updateStorage(Storage.push({
-      NAME: theName, 
-      DESCRIPTION: theDescription, 
-      LEVEL: theLevel
-    }));
-    console.log(Storage);
+    setStorage(
+      [...storage, {
+        NAME: name.current.value, 
+        DESCRIPTION: description.current.value, 
+        LEVEL: parseInt(level.current.value),
+        DONE: false
+      }] //unpack all items, put into first part, then add one more item to the end of it
+    );
+    console.log(storage);
     name.current.value = "";
     description.current.value = "";
   }
@@ -179,8 +154,11 @@ function App() {
         <br />
         <button>Submit</button>
       </form>
-      <ShowTask storage={Storage} />
-      <Completed CompletedTasks={CompletedTasks} />
+      <ShowTask 
+        setComplete={setComplete}
+        storage={storage.map((e, i) => ({...e, INDEX: i})).filter(e => !e.DONE)} 
+      />
+      <Completed CompletedTasks={storage.filter(e => e.DONE)} />
       <Footer />
     </div>
   );
