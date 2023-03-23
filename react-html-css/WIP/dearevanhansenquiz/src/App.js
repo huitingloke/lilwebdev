@@ -51,7 +51,7 @@ function Header() {
   );
 }
 
-function Question(props) {
+function QuestionTitle(props) {
   return (
     <div>
 
@@ -67,7 +67,7 @@ function Option(props) {
   );
 }
 
-function QuestionBox(props) {
+function Question(props) {
   return (
     <div>
       
@@ -78,11 +78,11 @@ function QuestionBox(props) {
 function QuestionList(props) {
   let questions = props.questions;
   //USE .MAP USE .MAP OK USE .MAP ASDFLAKDFLSJAKLJFSDFJDKLA
-  for (let question in questions) {
-    return (
-      <QuestionBox />
-    );
-  }
+  questions.map(
+    (question) => {
+      <Question />
+    }
+  )
 }
 
 function Results(props) {

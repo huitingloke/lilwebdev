@@ -1,10 +1,10 @@
 import './App.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import watermelon from "./Watermelon_Fox.png";
 
 function Timer(props) {
   return (
-    <h1>ehe!! ur time lefttt!!1 {(props.time / 60000).toFixed(2)}</h1>
+    <h1>ehe!! ur time lefttt!!1 <br />{(props.time / 60000).toFixed(2)}</h1>
   );
 }
 
@@ -19,6 +19,11 @@ function App() {
   let pomoTime = 1500000, breakTime = 300000, totalTime = pomoTime + breakTime;
   let [timer, setTimer] = useState(pomoTime);
 
+  useEffect(() => { //https://dev.to/yuridevat/how-to-create-a-timer-with-react-7b9 reference
+    const interval = setInterval(() => getTime(deadline), 1000);
+    return () => clearInterval(interval);
+  })
+
   return (
     <div className="mainApp">
       <img src={watermelon} alt="cutiepie" className="rotate" />
@@ -27,7 +32,8 @@ function App() {
       <div id="buttonGroup">
         <button onClick={
           () => {
-            
+            let startTime = new Date();
+            let endTime = new Date(+pomoTime);
           }
         }>start!! study!!</button>
         <button>pauss!!1</button>
